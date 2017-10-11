@@ -1,0 +1,19 @@
+{
+  "name": "hearthstoneapi",
+  "version": "1.0.0",
+  "description": "hearthstone API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ToddWilliams459/HearthstoneAPI.git"
+  },
+  "author": "Todd Williams",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ToddWilliams459/HearthstoneAPI/issues"
+  },
+  "homepage": "https://github.com/ToddWilliams459/HearthstoneAPI#readme"
+}
