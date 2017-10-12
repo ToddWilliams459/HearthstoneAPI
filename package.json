@@ -4,6 +4,8 @@
   "description": "hearthstone API",
   "main": "index.js",
   "scripts": {
+    "start": "node ./src/server.js",
+    "pretest": "eslint ./src --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +21,12 @@
   "devDependencies": {
     "eslint": "^4.8.0",
     "eslint-config-airbnb-base": "^12.0.2"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "bulma": "^0.6.0",
+    "http": "0.0.0",
+    "querystring": "^0.2.0",
+    "url": "^0.11.0"
   }
 }
