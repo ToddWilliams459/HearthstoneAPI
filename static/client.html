@@ -6,6 +6,26 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script type="text/babel">
+const parseJSON = (xhr, contnet) => {
+	//parse response (obj will be empty in a 204 updated)
+	const obj = JSON.parse(xhr.response);
+	
+	/*
+	  if(obj.message) {
+        const p = document.createElement('p');
+        p.textContent = `Message: ${obj.message}`;
+        content.appendChild(p);
+      }
+      
+      //if users in response, add to screen
+      if(obj.users) {
+        const userList = document.createElement('p');
+        const users = JSON.stringify(obj.users);
+        userList.textContent = users;
+        content.appendChild(userList);
+      }  */
+};
+  
 const handleResponse = (xhr) => {
     const content = document.querySelector("#content");
     
