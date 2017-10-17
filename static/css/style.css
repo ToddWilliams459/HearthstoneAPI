@@ -19,3 +19,9 @@ html, body {
   font-size: 2em;
   text-align: center;
 }
+
+#content div {
+	width: 20%;
+	background-color:lime;
+	display: inline-block;
+}

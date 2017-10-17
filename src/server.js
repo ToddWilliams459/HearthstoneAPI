@@ -2,20 +2,41 @@ const url = require("url");
 const http = require("http");
 const query = require("querystring");
 
-const pokeManager = require("./PokemonManager.js");
+const jsonHandler = require("./jsonResponses.js");
 const htmlHandler = require("./htmlResponses.js");
 
 const port = process.envPORT || process.env.NODE_PORT || 85;
+
+const handleGet = (request, response, parsedUrl) => {
+	let param = Number(parsedUrl.pathname.substring(1));
+	
+	if(parsedUrl.pathname === '/css/style.css' ){
+	htmlHandler.getCSS(request,response);		
+	} else if (parsedUrl.pathname === '/') {
+	htmlHandler.getIndex(request,response);
+	}  else if (!Number.isNaN(param)){
+	console.log(parsedUrl.pathname.substring(1));
+	jsonHandler.getPokemon(request,response, parsedUrl.pathname.substring(1));
+} else{
+	htmlHandler.getIndex(request,response);
+}
+};
 
 const onRequest = (request, response) => {
 	let parseUrl = url.parse(request.url);
 	let queryParam = query.parse(parseUrl.query);
 
-	let api = new pokeManager.PokemonManager();
-	api.getBerry(1)
-		.then((data) => console.log(data))
-		.catch((err) => console.log(err));
+	//let api = new pokeManager.PokemonManager();
+	//api.getBerry(1)
+	//	.then((data) => console.log(data))
+		//.catch((err) => console.log(err));
 		
+	if (request.method === 'POST') {
+    handlePost(request, response, parseUrl);
+  } else {
+    handleGet(request, response, parseUrl);
+  }
+		/*
 	switch (parseUrl.pathname) {
 		case '/':
 		htmlHandler.getIndex(request,response);	
@@ -26,7 +47,7 @@ const onRequest = (request, response) => {
 		default:
 		htmlHandler.getIndex(request,response);
 		break;
-	}
+	}*/
 };
 
 http.createServer(onRequest).listen(port);
