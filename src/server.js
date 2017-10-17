@@ -5,7 +5,7 @@ const query = require("querystring");
 const jsonHandler = require("./jsonResponses.js");
 const htmlHandler = require("./htmlResponses.js");
 
-const port = process.envPORT || process.env.NODE_PORT || 85;
+const port = process.envPORT || process.env.NODE_PORT || 3050;
 
 const handleGet = (request, response, parsedUrl) => {
 	let param = Number(parsedUrl.pathname.substring(1));
@@ -15,11 +15,12 @@ const handleGet = (request, response, parsedUrl) => {
 	} else if (parsedUrl.pathname === '/') {
 	htmlHandler.getIndex(request,response);
 	}  else if (!Number.isNaN(param)){
-	console.log(parsedUrl.pathname.substring(1));
 	jsonHandler.getPokemon(request,response, parsedUrl.pathname.substring(1));
-} else{
+	} else if (parsedUrl.pathname === '/css/bootstrap.css') {
+	htmlHandler.getBootstrap(request,response);
+	}else{
 	htmlHandler.getIndex(request,response);
-}
+	}
 };
 
 const onRequest = (request, response) => {
