@@ -7,30 +7,31 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script type="text/babel">
+    var iterator = 0;
+	var div;
 const parseJSON = (xhr, content) => {
 	//parse response (obj will be empty in a 204 updated)
 	const obj = JSON.parse(xhr.response);
 	//console.log(obj);
-    const div = document.createElement('div');	
-	//div.className = "className here";  	
-	
-	// create row div on iterator   in if statement    BELOW
-	//const row = document.createElement('div');
-	
-	
-	//create column on iterator
-	//const col = document.createElement('div');
-	
+	if(iterator == 0){
+	  div = document.createElement('div');	
+	  div.className = "row";
+	  document.body.appendChild(div);
+	}
+
+	const col = document.createElement('div');
+	col.className = "col-lg-3";
+	div.appendChild(col);
 	  if(obj.name) {
         const p = document.createElement('p');
         p.textContent = `Species: ${obj.name}`;
-        div.appendChild(p);
+        col.appendChild(p);
       }
 	  
 	  if(obj.img) {
         const image = document.createElement('img');
         image.src = obj.img;
-        div.appendChild(image);
+        col.appendChild(image);
       }
 	  /*
       
@@ -41,7 +42,11 @@ const parseJSON = (xhr, content) => {
         userList.textContent = users;
         content.appendChild(userList);
       }  */
-	  content.appendChild(div);
+	 // content.appendChild(div);
+	  iterator = iterator + 1;
+	  if (iterator == 4){
+	  iterator = 0;
+	  }
 };
   
 const handleResponse = (xhr) => {
@@ -62,12 +67,13 @@ const sendAjax = (url, type) => {
   xhr.send();
 };
 const init = () => {
+
 //for loop calling send ajax that loops through all pokemon
       const sendButton = document.querySelector("#send");
       var targetPage = document.getElementById("page").value;
       //functions to call sendAjax for us with the correct parameters
       const sendQuery = () => sendAjax(targetPage);
-      for (var i = 1; i < 5; i++) {
+      for (var i = 1; i < 50; i++) {
 		sendAjax(i);
 	  }	  
       //when we change the dropdown the value we send changes targetPage
@@ -94,14 +100,15 @@ window.onload = init;
     <button id="send">Send</button>
   </section>
   <section id="content">
+
   </section>
-  
-<div class="row">  //
-  <div class="col-sm-3">.col-sm-3</div>
-  <div class="col-sm-3">.col-sm-3</div>
-  <div class="col-sm-3">.col-sm-3</div>
-  <div class="col-sm-3">.col-sm-3</div>
+    <div class="row">  
+  <div class="col-lg-3">.col-sm-3</div>
+  <div class="col-lg-3">.col-sm-3</div>
+  <div class="col-lg-3">.col-sm-3</div>
+  <div class="col-lg-3">.col-sm-3</div>
 </div>
+
     ...
   </div>
 </div>

@@ -5,7 +5,7 @@ const query = require("querystring");
 const jsonHandler = require("./jsonResponses.js");
 const htmlHandler = require("./htmlResponses.js");
 
-const port = process.envPORT || process.env.NODE_PORT || 3050;
+const port = process.envPORT || process.env.NODE_PORT || 3303;
 
 const handleGet = (request, response, parsedUrl) => {
 	let param = Number(parsedUrl.pathname.substring(1));
