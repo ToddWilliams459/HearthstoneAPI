@@ -24,7 +24,11 @@ const getPokemon = (request, response,id) => {
     users,
   };
   if (request.method === 'GET') {
-	  pokemonData.then((data)=>respondJSON(request, response, 200, {name:data.name,img:data.sprites.front_shiny}));
+	  pokemonData.then((data)=>respondJSON(request, response, 200, 
+	  {name:data.name,
+	  img:data.sprites.front_shiny,
+	  types:data.types}));
+	  
       console.log(request.method);
   } else if (request.method === 'HEAD') {
     

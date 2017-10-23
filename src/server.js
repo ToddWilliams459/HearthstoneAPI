@@ -37,18 +37,7 @@ const onRequest = (request, response) => {
   } else {
     handleGet(request, response, parseUrl);
   }
-		/*
-	switch (parseUrl.pathname) {
-		case '/':
-		htmlHandler.getIndex(request,response);	
-		break;
-		case '/style.css':
-		htmlHandler.getCSS(request,response);
-		break;
-		default:
-		htmlHandler.getIndex(request,response);
-		break;
-	}*/
+
 };
 
 http.createServer(onRequest).listen(port);

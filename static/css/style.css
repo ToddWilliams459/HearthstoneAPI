@@ -20,5 +20,21 @@ html, body {
 
 #content div {
 	width: 100%;
-	display: inline-block;
+	display: block;
+
+}
+
+#lg3 {
+	box-shadow: 10px 10px 5px #888888;
+	border: 1px solid grey;
+	background-color: #a8c6f7;
+}
+
+#lg3:hover{
+}
+
+.cardContent {
+	display:block;
+	margin: auto;
+	text-align:center;
 }
