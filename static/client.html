@@ -24,6 +24,7 @@ const parseJSON = (xhr, content) => {
 	const col = document.createElement('div');
 	col.className = "col-lg-3";
 	col.id = "lg3";
+	document.getElementById("lg3").style.background-color = "red";
 	div.appendChild(col);
 	//Adding the pokemons data to their col div
 	  if(obj.name) {
@@ -41,10 +42,18 @@ const parseJSON = (xhr, content) => {
       }
 	  
 	  if(obj.types){
-        const p = document.createElement('p');
+	  	const p = document.createElement('p');
 		p.className = "cardContent";
-        p.textContent = `Types: ${obj.types.slot}`;
-        col.appendChild(p);	  }
+		if(obj.types[0].slot === 2) {
+			p.textContent = `Type: ${obj.types[0].type.name}  ,  ${obj.types[1].type.name}`;
+
+		}else{
+			p.textContent = `Type: ${obj.types[0].type.name}`;
+
+		}
+			col.appendChild(p);	 
+		
+ }
 	 
 	 //iterator var to keep track of how many pokemon per row 
 	  iterator = iterator + 1;
