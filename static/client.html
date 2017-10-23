@@ -10,6 +10,7 @@
     var iterator = 0;
 	var div;
 const parseJSON = (xhr, content) => {
+
 	//parse response (obj will be empty in a 204 updated)
 	const obj = JSON.parse(xhr.response);
 
@@ -24,7 +25,6 @@ const parseJSON = (xhr, content) => {
 	const col = document.createElement('div');
 	col.className = "col-lg-3";
 	col.id = "lg3";
-	document.getElementById("lg3").style.background-color = "red";
 	div.appendChild(col);
 	//Adding the pokemons data to their col div
 	  if(obj.name) {
@@ -40,7 +40,7 @@ const parseJSON = (xhr, content) => {
         image.src = obj.img;
         col.appendChild(image);
       }
-	  
+
 	  if(obj.types){
 	  	const p = document.createElement('p');
 		p.className = "cardContent";
@@ -52,9 +52,10 @@ const parseJSON = (xhr, content) => {
 
 		}
 			col.appendChild(p);	 
-		
+
  }
-	 
+	  //document.getElementById("lg3").style.backgroundColor = "red";
+
 	 //iterator var to keep track of how many pokemon per row 
 	  iterator = iterator + 1;
 	  if (iterator == 4){
@@ -97,7 +98,10 @@ const init = () => {
       //attach the correct functions to the correct events
       sendButton.addEventListener('click', sendQuery);
 };
+
+
 window.onload = init;
+
   </script>
 </head>
 <body>
