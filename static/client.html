@@ -11,7 +11,7 @@
   <script type="text/babel">
 var iterator = 0;
 var div;
-const parseJSON = (xhr, content) => {
+const parseJSON = (xhr) => {
 	//parse response (obj will be empty in a 204 updated)
 	const obj = JSON.parse(xhr.response);
 
@@ -19,19 +19,19 @@ const parseJSON = (xhr, content) => {
 };
   
 const handleResponse = (xhr) => {
-    const content = document.querySelector("#content"); 
-	
-	const obj = parseJSON(xhr, content);
+	const obj = parseJSON(xhr);
 	addToScene(obj);
 	
 };
 
  const addToScene = (obj) => {
+     const content = document.querySelector("#content"); 
+
 //if there are not 4 pokemon in this row  creates a new row div
 	if(iterator == 0){
 	  div = document.createElement('div');	
 	  div.className = "row";
-	  document.body.appendChild(div);
+	  content.appendChild(div);
 	}
 	
 	//Each pokemon gets there own col and that is created and added to the row
@@ -118,7 +118,7 @@ const sendPost = (e, pokemonClicked) => {
 
 const init = () => {
       //functions to call sendAjax for us with the correct parameters
-      for (var i = 1; i < 5; i++) {
+      for (var i = 1; i < 10; i++) {
 		sendAjax(i);
 	  }	  
 
@@ -129,16 +129,13 @@ window.onload = init;
 </head>
 <body>
 	<section id="top">
-		<h2>Pokemon Shiny Rater!</h2>
-		<h3><a href="/client2.html">Toggle Collection </a></h3>
-
+		<h2>Pokemon Shiny Dex</h2>
+		<h3><a href="/client2.html">My Shiny Collection </a></h3>
+		<p> Select pokemon from the Shiny Dex to have them appear/removed in your Collection! </p>
 	</section>
-	<section id="content">
-
+	<section id ="content">
+	
 	</section>
-
-  </section>
-
 
 </body>
 </html>

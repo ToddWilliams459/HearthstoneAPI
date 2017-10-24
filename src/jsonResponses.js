@@ -37,7 +37,7 @@ const getFavorites = (request, response) => {
 	const responseJSON = {
 		users,
 	};
-	let responseCode = 201;
+	let responseCode = 200;
 
 	if (request.method === 'GET') {
 		return respondJSON(request,response,responseCode,responseJSON);
@@ -55,6 +55,12 @@ const addPokemon = (request, response, body) => {
 	if(users.indexOf(body.id) == -1){
 		users.push(body.id);
 		console.log(users);
+		return respondJSON(request,response,responseCode,responseJSON);
+	}
+	else{
+		users.splice(users.indexOf(body.id),1);
+		console.log(users);
+		responseJSON.message = 'Pokemon Removed';
 		return respondJSON(request,response,responseCode,responseJSON);
 	}
 

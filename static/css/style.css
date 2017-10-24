@@ -3,24 +3,30 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
+  background-color:#f4f3d7;
+
 }
 
 #top {
   text-align: center;
-  margin: 0 auto;
+  margin: 0;
+  padding:0;
+  background-color:#f4f3d7;
+	box-shadow: 10px 10px 5px #888888;
+	border: 1px solid grey;
 }
 
 #top h1 {
   font-size: 2em;
+  background-color:#f4f3d7;
 }
 
 #content {
-  margin-top: 100px;
+  margin: 0;
+  padding: 0;
 }
 
 #content div {
-	width: 100%;
-	display: block;
 
 }
 
