@@ -1807,6 +1807,9 @@ pre code {
   }
   .col-sm-3 {
     width: 25%;
+	box-shadow: 10px 10px 5px #888888;
+	border: 1px solid grey;
+	background-color: #4286f4;
   }
   .col-sm-2 {
     width: 16.66666667%;

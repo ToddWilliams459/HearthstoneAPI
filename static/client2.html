@@ -9,7 +9,7 @@
   <script type="text/babel">
 var iterator = 0;
 var div;
-const storedObj;
+var storedObj;
 const parseJSON = (xhr, content) => {
 	//parse response (obj will be empty in a 204 updated)
 	const obj = JSON.parse(xhr.response);
@@ -22,11 +22,13 @@ const handleResponse = (xhr) => {
 	
 	const obj = parseJSON(xhr, content);
 	storedObj = obj;
-	//for (var i=0;i < obj.users.length;i++){
-	//sendAjax(obj.users[i]);	
-	//}
-/*
-	//if there are not 4 pokemon in this row  creates a new row div
+	
+	addToScene(obj);
+};
+
+
+ const addToScene = (obj) => {
+//if there are not 4 pokemon in this row  creates a new row div
 	if(iterator == 0){
 	  div = document.createElement('div');	
 	  div.className = "row";
@@ -38,6 +40,7 @@ const handleResponse = (xhr) => {
 	col.className = "col-sm-3";
 	col.classList.add("sm");
 	
+	//document.getElementById("lg3").style.backgroundColor = "red";
 	div.appendChild(col);
 	
 	const a = document.createElement('a');
@@ -49,7 +52,6 @@ const handleResponse = (xhr) => {
 	
 	
 	col.appendChild(a);
-	
 	
 	//Adding the pokemons data to their col div
 	  if(obj.name) {
@@ -79,14 +81,14 @@ const handleResponse = (xhr) => {
 			a.appendChild(p);	 
 		
  }
-	 
 	 //iterator var to keep track of how many pokemon per row 
 	  iterator = iterator + 1;
 	  if (iterator == 4){
 	  iterator = 0;
-	  } */
-	
+	  }
+	  
 };
+
 
 const sendAjax = (url) => {
 	return new Promise((resolve,reject) => {
@@ -95,19 +97,19 @@ const sendAjax = (url) => {
 		xhr.open('GET', url);
 		xhr.setRequestHeader("Accept", 'application/json');
 		xhr.onload = () => {
-			// if status == 200
-			// 	resolve(response)
-			// else
-			// reject(data)
+		console.log(xhr);
+			if(xhr.status == 200){
+				resolve(xhr.response);
+			} 
+			else {
+				reject("Not status code 200");
+			}
 		};
 		xhr.send();
-		
-		
 
 	});
 
-};
-
+}; 
 
 const sendPost = (e, pokemonClicked) => {
 	const xhr = new XMLHttpRequest();
@@ -123,15 +125,26 @@ const sendPost = (e, pokemonClicked) => {
 	xhr.send(obj);
 	
 }; 
+() => {
 
-
+}
 const init = () => {
     //functions to call sendAjax for us with the correct parameters
-	sendAjax("/getFavorites") // get favoroes => [1, 2, 3, ...]
-		.then((data) => {
-			// foreach elem in favorites make another ajax call to get the pokemon data (picture, name, etc)
-			// make another ajax call to get more pokemon
-		});
+	sendAjax("/getFavorites",'application/json').then((numbers) => {
+		var obj = JSON.parse(numbers);
+		for(var i = 0; i < obj.users.length;i++) {
+			sendAjax(obj.users[i], 'application/json').then((data) => {
+				var obj2 = JSON.parse(data);
+				addToScene(obj2);
+			});
+		}
+	}).catch((hi) => {
+		console.log(hi);
+	});
+	//console.log(storedObj.users[0]);
+	//for(var i = 0; i < storedObj.users.length;i++){
+	//	setTimeout(sendAjax(storedObj.users[i]),1000);
+	//}
 		
     //attach the correct functions to the correct events
 };

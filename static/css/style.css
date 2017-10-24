@@ -24,12 +24,12 @@ html, body {
 
 }
 
-#sm3 {
+#sm {
 	box-shadow: 10px 10px 5px #888888;
 	border: 1px solid grey;
 }
 
-#sm3:hover{
+#sm:hover{
 }
 
 .cardContent {

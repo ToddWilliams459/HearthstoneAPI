@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<<<<<<< Updated upstream
   <title>Pokemon API</title>
 
   <title>Shiny Hunter API</title>
@@ -23,8 +22,12 @@ const handleResponse = (xhr) => {
     const content = document.querySelector("#content"); 
 	
 	const obj = parseJSON(xhr, content);
+	addToScene(obj);
 	
-	//if there are not 4 pokemon in this row  creates a new row div
+};
+
+ const addToScene = (obj) => {
+//if there are not 4 pokemon in this row  creates a new row div
 	if(iterator == 0){
 	  div = document.createElement('div');	
 	  div.className = "row";
@@ -91,7 +94,6 @@ const sendAjax = (url, type) => {
   xhr.open('GET', url);
     
   xhr.setRequestHeader("Accept", type);
-    
   xhr.onload = () => handleResponse(xhr);
     
   xhr.send();
@@ -116,7 +118,7 @@ const sendPost = (e, pokemonClicked) => {
 
 const init = () => {
       //functions to call sendAjax for us with the correct parameters
-      for (var i = 1; i < 9; i++) {
+      for (var i = 1; i < 5; i++) {
 		sendAjax(i);
 	  }	  
 
