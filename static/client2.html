@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<<<<<<< Updated upstream
   <title>Pokemon API</title>
-
-  <title>Shiny Hunter API</title>
   <link rel="stylesheet" type="text/css" href="/css/style.css">
   <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 
@@ -12,10 +9,11 @@
   <script type="text/babel">
 var iterator = 0;
 var div;
+const storedObj;
 const parseJSON = (xhr, content) => {
 	//parse response (obj will be empty in a 204 updated)
 	const obj = JSON.parse(xhr.response);
-
+	
 	return obj;
 };
   
@@ -23,7 +21,11 @@ const handleResponse = (xhr) => {
     const content = document.querySelector("#content"); 
 	
 	const obj = parseJSON(xhr, content);
-	
+	storedObj = obj;
+	//for (var i=0;i < obj.users.length;i++){
+	//sendAjax(obj.users[i]);	
+	//}
+/*
 	//if there are not 4 pokemon in this row  creates a new row div
 	if(iterator == 0){
 	  div = document.createElement('div');	
@@ -36,7 +38,6 @@ const handleResponse = (xhr) => {
 	col.className = "col-sm-3";
 	col.classList.add("sm");
 	
-	//document.getElementById("lg3").style.backgroundColor = "red";
 	div.appendChild(col);
 	
 	const a = document.createElement('a');
@@ -48,6 +49,7 @@ const handleResponse = (xhr) => {
 	
 	
 	col.appendChild(a);
+	
 	
 	//Adding the pokemons data to their col div
 	  if(obj.name) {
@@ -77,24 +79,33 @@ const handleResponse = (xhr) => {
 			a.appendChild(p);	 
 		
  }
+	 
 	 //iterator var to keep track of how many pokemon per row 
 	  iterator = iterator + 1;
 	  if (iterator == 4){
 	  iterator = 0;
-	  }
-	  
+	  } */
+	
 };
 
-const sendAjax = (url, type) => {
-  const xhr = new XMLHttpRequest();
+const sendAjax = (url) => {
+	return new Promise((resolve,reject) => {
+		const xhr = new XMLHttpRequest();
     
-  xhr.open('GET', url);
-    
-  xhr.setRequestHeader("Accept", type);
-    
-  xhr.onload = () => handleResponse(xhr);
-    
-  xhr.send();
+		xhr.open('GET', url);
+		xhr.setRequestHeader("Accept", 'application/json');
+		xhr.onload = () => {
+			// if status == 200
+			// 	resolve(response)
+			// else
+			// reject(data)
+		};
+		xhr.send();
+		
+		
+
+	});
+
 };
 
 
@@ -115,12 +126,14 @@ const sendPost = (e, pokemonClicked) => {
 
 
 const init = () => {
-      //functions to call sendAjax for us with the correct parameters
-      for (var i = 1; i < 9; i++) {
-		sendAjax(i);
-	  }	  
-
-      //attach the correct functions to the correct events
+    //functions to call sendAjax for us with the correct parameters
+	sendAjax("/getFavorites") // get favoroes => [1, 2, 3, ...]
+		.then((data) => {
+			// foreach elem in favorites make another ajax call to get the pokemon data (picture, name, etc)
+			// make another ajax call to get more pokemon
+		});
+		
+    //attach the correct functions to the correct events
 };
 window.onload = init;
   </script>
@@ -128,15 +141,11 @@ window.onload = init;
 <body>
 	<section id="top">
 		<h2>Pokemon Shiny Rater!</h2>
-		<h3><a href="/client2.html">Toggle Collection </a></h3>
-
+		<h3><a href="/client.html">Toggle Pokedex </a></h3>
 	</section>
 	<section id="content">
 
 	</section>
-
-  </section>
-
 
 </body>
 </html>
