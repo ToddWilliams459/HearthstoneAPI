@@ -23,7 +23,7 @@ const handleGet = (request, response, parsedUrl) => {
 	}else if(parsedUrl.pathname === '/getFavorites'){
 	jsonHandler.getFavorites(request,response);
 	}else{
-	htmlHandler.getIndex(request,response);
+	jsonHandler.notPokemon(request,response);
 	}
 };
 
