@@ -28,30 +28,31 @@ const getPokemon = (request, response, id) => {
   // IF REQUEST METHOD == GET THE RUN THE GET RESPONSE
   if (request.method === 'GET') {
     if (id <= maxPokemon) {
-      pokemonData.then((data) => {
-        respondJSON(
-          request, response, 200,
-          {
-            id: data.id,
-            name: data.name,
-            img: data.sprites.front_shiny,
-            types: data.types,
-          },
-        );
-      });
+      return pokemonData.then(data => respondJSON(
+        request, response, 200,
+        {
+          id: data.id,
+          name: data.name,
+          img: data.sprites.front_shiny,
+          types: data.types,
+        },
+      ));
+      // return respondJSON(request, response, 200);
     } else if (id > maxPokemon) {
       responseJSON = ' Pokemon Not Found';
       responseCode = 404;
       return respondJSON(request, response, responseCode, responseJSON);
-    } else {
-      responseJSON = 'Bad Request';
-      responseCode = 400;
-      return respondJSON(request, response, responseCode, responseJSON);
     }
+    responseJSON = 'Bad Request';
+    responseCode = 400;
+    return respondJSON(request, response, responseCode, responseJSON);
+
+
     // IF THE REQUEST METHOD ISNT GET THEN WE RUN THE HEAD RESPONSE
   } else if (request.method === 'HEAD') {
     return respondJSONMeta(request, response, 200);
   }
+  return respondJSON(request, response, 400);
 };
 
 const notPokemon = (request, response) => {
@@ -67,11 +68,16 @@ const getFavorites = (request, response) => {
   const responseJSON = {
     users,
   };
-  const responseCode = 200;
+  let responseCode = 200;
 
   if (request.method === 'GET') {
     return respondJSON(request, response, responseCode, responseJSON);
   }
+  responseCode = 400;
+  responseJSON.message = 'Bad Request';
+
+
+  return respondJSON(request, response, responseCode, responseJSON);
 };
 // GetPokemonFull
 // Look up multi user application in node
